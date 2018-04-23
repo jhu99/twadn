@@ -90,6 +90,7 @@ void ReadBitscore::colected_candidates(double beta,
 	}
 	else
 	{
+		//default: twadn will not find two conversed proteins from a same network
 		m_dMeanf = max;
 	}
 	std::cout << "# select finish!" << std::endl;
