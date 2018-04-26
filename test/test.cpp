@@ -78,10 +78,10 @@ int main(int argc, const char * argv[])
 	std::unordered_map<std::string, int> Allnet_protein;
 	combineNetId(net1.net_protein, net2.net_protein, Allnet_protein);
 
-	std::cout << "size" << Allnet_protein.size() << std::endl;
-	std::unordered_map<std::string, int>::iterator iter;
-	for (iter = Allnet_protein.begin(); iter != Allnet_protein.end(); iter++)
-		std::cout << iter->first << " :" << iter->second << std::endl;
+	//std::cout << "size" << Allnet_protein.size() << std::endl;
+	//std::unordered_map<std::string, int>::iterator iter;
+	//for (iter = Allnet_protein.begin(); iter != Allnet_protein.end(); iter++)
+		//std::cout << iter->first << " :" << iter->second << std::endl;
 
 	Alignment Ali(&Allnet_protein, &bitscore.protein_score, bitscore.m_dMeanf);
 	sumulate sim(1000, 100, 10, bitscore.can_size, candidates, &Ali, "testOut.txt");

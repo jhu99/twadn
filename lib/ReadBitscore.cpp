@@ -41,8 +41,15 @@ ReadBitscore::ReadBitscore(std::string filename,
 				m_dMinBitsc = value;
 			}
 		}
-		can_size = protein_score.size();
+		
+		//std::cout << temp[0] << " " << temp[1] << std::endl;
 	}
+	can_size = protein_score.size();
+	if (can_size == 0){
+		std::cout << "candidates is empty, please check whether parameter evalue is too small!" << std::endl;
+		assert(0);
+	}
+	std::cout << "can_size = protein_score.size():" << can_size << std::endl;
 	std::cout << "# read done..." << std::endl;
 	std::cout << "m_dMaxBitsc" << m_dMaxBitsc << std::endl;
 	std::cout << "m_dMinBitsc" << m_dMinBitsc << std::endl;

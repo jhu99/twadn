@@ -15,9 +15,7 @@ t3	a	c
 t3	b	c
 t3	a	d
 t3	a	e
-t4	a	b
 t4	a	c
-t4	b	c
 t4	a	d
 t4	a	e
 t4	d	e
