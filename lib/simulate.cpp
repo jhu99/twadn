@@ -47,13 +47,13 @@ void sumulate::start(std::ofstream &out)
 			//std::cout <<  "before:" << score << std::endl;
 
 			score += m_Pali->update(pro[0], pro[1], Ti, s);
-			out << score << "\n";
+			//out << score << "\n";
 			n++;
 
 			//std::cout << "after:" << score << std::endl;
 			//std::cout << "ali:" << std::endl;
-			m_Pali->writeAlignment(m_Soutput);
-			m_Pali->printMap();
+			//m_Pali->writeAlignment(m_Soutput);
+			//m_Pali->printMap();
 			//std::cout << std::endl;
 		}
 		std::cout << "# iterator" << i << ",alignment score :" << score << std::endl;

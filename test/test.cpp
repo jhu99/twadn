@@ -84,7 +84,7 @@ int main(int argc, const char * argv[])
 		//std::cout << iter->first << " :" << iter->second << std::endl;
 
 	Alignment Ali(&Allnet_protein, &bitscore.protein_score, bitscore.m_dMeanf);
-	sumulate sim(1000, 100, 10, bitscore.can_size, candidates, &Ali, "testOut.txt");
+	sumulate sim(1000, 100, 10, bitscore.can_size, candidates, &Ali, mf_option.outputfilename);
 	sim.start(out);	
 	
 	delete[] candidates;
