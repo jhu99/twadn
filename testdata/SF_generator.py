@@ -105,9 +105,29 @@ def testTWADNPair(path):
 
 
 if __name__ == '__main__':
-    path = '/home/hjh/桌面/workshop/my_study/lastNetCoffee2/Synthetic_Network'
+    # path = '/home/hjh/桌面/workshop/my_study/lastNetCoffee2/Synthetic_Network'
     #netName = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     #netName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
     #main(path, netName)
     #prepareForTWADN(path, netName)
-    testTWADNPair(path)
+    # testTWADNPair(path)
+    
+    testPath = '/home/hjh/桌面/workshop/my_study/lastNetCoffee2/twadn'
+    proSet = set()
+    fr1 = open(testPath + '/' + 'TWADNdynet_a1.txt')
+    for pro in fr1.readlines():
+        tmp = pro.strip().split('\t')
+        proSet.add(tmp[1])
+        proSet.add(tmp[2])
+    fr2 = open(testPath + '/' + 'TWADNdynet_a2.txt')
+    for pro in fr2.readlines():
+        tmp = pro.strip().split('\t')
+        proSet.add(tmp[1])
+        proSet.add(tmp[2])
+    fw = open('/home/hjh/桌面/workshop/my_study/lastNetCoffee2/twadn/DynaBitscore_test.txt', 'w')
+    for i in proSet:
+        for j in proSet:
+            fw.write(i + '\t' + j + '\t' + '1e-7' +
+                     '\t' + str(random.randint(90, 100)) + '\n')
+    fw.close()
+    fr1.close()
