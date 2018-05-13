@@ -17,6 +17,6 @@ do
         net2=${net[1]}
 
         echo test$i
-        ./twadn -inputnet1 $net1 -inputnet2 $net2 -inputbit $bit -timeLen1 10 -timeLen2 10 -evalue 1e-3 -output $path$i/Res_Pair1_test$i
+        ./twadn -inputnet1 $net1 -inputnet2 $net2 -inputbit $bit -timeLen1 9 -timeLen2 9 -evalue 1e-3 -output $path$i/Res_Pair1_test$i
 done
 
