@@ -21,7 +21,7 @@ def DyGenerator(g, addNode, p, q):
         g.add_edge(selectOne, addNode)
         
 
-def make_dyNet(path, p, q, length, nodeName):
+def make_dyNet(path, p, q, nodeName):
     g = nx.Graph()
     seedNetNum = 15
     nameList = []
@@ -31,27 +31,31 @@ def make_dyNet(path, p, q, length, nodeName):
     g = nx.Graph()
     g.add_edges_from(nameList)
     
-    for i in range(15, 1001):
+    i = 15
+    while True:
         DyGenerator(g, nodeName+'%s' % i, p, q)
-        time = 1000 / length
-        if i % time == 0:
-            nx.write_edgelist(g, path + '/dyNetT%s.txt' % i, data=False, delimiter='\t')
-            print(i, len(g.nodes()))
-            
-
+        g = max(nx.connected_component_subgraphs(g), key=len)
+        num_nodes = len(g)
+        if num_nodes % 100 == 0:
+            nx.write_edgelist(g, path + '/dyNetT%s.txt' % num_nodes,
+                              data=False, delimiter='\t')
+            print('sub len:', num_nodes, 'i:', i)
+        i += 1
+        if num_nodes > 1000:
+            break
 
 def main(path, netName):
     p = 0.7
     q = 0.6
-    for j in netName:
-        dirPath = os.path.join(path, 'DyNet%s' % j)
+    for nodeN in netName:
+        dirPath = os.path.join(path, 'DyNet%s' % nodeN)
         if os.path.exists(dirPath):
-            make_dyNet(dirPath, p, q, 10, j)
+            make_dyNet(dirPath, p, q, nodeN)
         else:
             os.mkdir(dirPath)
-            make_dyNet(dirPath, p, q, 10, j)
+            make_dyNet(dirPath, p, q, nodeN)
 
-        print('j:', j)
+        print('nodeN:', nodeN)
 
 def prepareForTWADN(path, netName):
     for j in netName:
@@ -93,29 +97,30 @@ def makeBitFile(testPath):
 
 
 def testTWADNPair(path):
-    testPair = path + '/differentPair'
+    testPair = path + '/testPair2'
     net_list2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     net_list1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
     cnt = 0
     for i in range(10):
-        for j in range(10):
+        for j in range(i+1, 10):
             testPath = os.path.join(testPair + '/test%s' % cnt)
             cnt += 1
             if not os.path.exists(testPath):
                 os.mkdir(testPath)
-            dir1 = os.path.join(path, 'p0.3_q0.7/DyNet%s/TWADNdynet_%s.txt' %
-                                (net_list1[i], net_list1[i]))
+            dir1 = os.path.join(path, 'p0.7_q0.6/DyNet%s/TWADNdynet_%s.txt' %
+                                (net_list2[i], net_list2[i]))
             dir2 = os.path.join(path, 'p0.7_q0.6/DyNet%s/TWADNdynet_%s.txt' %
                                 (net_list2[j], net_list2[j]))
-            shutil.copy(dir1, testPath + '/TWADNdynet_%s.txt' % net_list1[i])
+            shutil.copy(dir1, testPath + '/TWADNdynet_%s.txt' % net_list2[i])
             shutil.copy(dir2, testPath + '/TWADNdynet_%s.txt' % net_list2[j])
             makeBitFile(testPath)
 
 
 
+
 if __name__ == '__main__':
-    path = '/home/hjh/桌面/workshop/my_study/lastNetCoffee2/Synthetic_Network/'
-    #netName = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    path = '/home/hjh/桌面/workshop/my_study/lastNetCoffee2/Synthetic_Network'
+    netName = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     #netName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
     #main(path, netName)
     #prepareForTWADN(path, netName)
