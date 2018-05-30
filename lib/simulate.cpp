@@ -36,7 +36,7 @@ void sumulate::start(std::ofstream &out)
 	{
 		int n = 0;
 		Ti = T0 - i * (m_iTmax - m_iTmin) / m_iK;
-		while (n < 212)
+		while (n < 2000)
 		{
 
 			int _random = distribution(generator);   //get a random number
